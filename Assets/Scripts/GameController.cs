@@ -24,6 +24,10 @@ public class GameController: MonoBehaviour {
 
     private void Update()
     {
+        if (Screen.currentResolution.height != 240 || Screen.currentResolution.height != 320)
+        {
+            Screen.SetResolution(320, 240, false);
+        }
         var distance = car.GetDistance();
 
         tooSlowText.SetActive(car.GetVelocity() < car.minVelocity + 30);

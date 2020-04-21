@@ -93,13 +93,13 @@ Material:
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _FirstStripColor: {r: 0.8, g: 0.1, b: 0, a: 1}
+    - _FirstStripColor: {r: 0.5566038, g: 0.098893374, b: 0, a: 1}
     - _GrassColor: {r: 0.1, g: 0.8, b: 0, a: 1}
     - _GrassColorA: {r: 0.26666668, g: 0.6784314, b: 0.36078432, a: 1}
     - _GrassColorB: {r: 0.31764707, g: 0.76862746, b: 0.24705882, a: 1}
     - _HueVariation: {r: 1, g: 0.5, b: 0, a: 0.1}
     - _MiddleStripColor: {r: 0.8, g: 0.8, b: 0.8, a: 1}
-    - _MiddleStripColorA: {r: 0.254717, g: 0.18623176, b: 0.18623176, a: 1}
+    - _MiddleStripColorA: {r: 0.047169805, g: 0.041607328, b: 0.041764285, a: 1}
     - _MiddleStripColorB: {r: 0.8, g: 0.8, b: 0.8, a: 1}
-    - _RoadColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
-    - _SecondStripColor: {r: 0.98039216, g: 0.98039216, b: 0.98039216, a: 1}
+    - _RoadColor: {r: 0.047169805, g: 0.041607328, b: 0.041764285, a: 1}
+    - _SecondStripColor: {r: 0.7783019, g: 0.9457959, b: 1, a: 1}

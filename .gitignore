@@ -4,6 +4,9 @@
 #
 .idea
 
+Build
+Build.*
+
 /[Ll]ibrary/
 /[Tt]emp/
 /[Oo]bj/
