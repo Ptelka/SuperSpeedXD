@@ -13,7 +13,7 @@ Material:
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 3000
+  m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
@@ -103,3 +103,4 @@ Material:
     - _MiddleStripColorB: {r: 0.8, g: 0.8, b: 0.8, a: 1}
     - _RoadColor: {r: 0.047169805, g: 0.041607328, b: 0.041764285, a: 1}
     - _SecondStripColor: {r: 0.7783019, g: 0.9457959, b: 1, a: 1}
+  m_BuildTextureStacks: []

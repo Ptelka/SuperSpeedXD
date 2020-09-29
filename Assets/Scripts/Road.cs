@@ -1,31 +1,30 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Road : MonoBehaviour {
     public float curvature = 0f;
-    public float perspectiveFactor = 0f;
     public Vector2 size = new Vector2(0.6f, 0.6f);
-    public float distance;
     
+    private float lastDistance;
+
     private Material material;
     
-    private static readonly int Curvature = Shader.PropertyToID("_Curvature");
-    private static readonly int Distance = Shader.PropertyToID("_Distance");
+    private static readonly int CurvatureId = Shader.PropertyToID("curvature");
+    private static readonly int DistanceId = Shader.PropertyToID("distance");
 
     public Vector2[] sections;
 
     private int section = 0;
     private float sum = 0;
-
-    private Curvature cur = new Curvature();
     
-    void Start()
+    private void Start()
     {
         material = GetComponent<SpriteRenderer>().material;
-        material.SetFloat("_RoadSizeY", size.y);
-        material.SetFloat("_PerspectiveFactor", perspectiveFactor);
-        material.SetFloat("_RoadSizeX", size.x / 2);
+        material.SetVector("road_size", new Vector4(size.x, size.y));
+        material.SetColorArray("layers", new []{Color.gray, Color.black, Color.red});
+        material.SetColorArray("background", new []{Color.white, Color.yellow});
+        material.SetFloatArray("layers_sizes", new []{0.4f, 0.05f, 0.05f});
+        material.SetInt("layers_count", 3);
+        material.SetFloat("markings_size", 0.01f);
 
         foreach (var s in sections)
         {
@@ -35,23 +34,27 @@ public class Road : MonoBehaviour {
 
     void Update()
     {
-        material.SetFloat(Curvature, curvature);
-        material.SetFloat(Distance, distance);
+        float distance = Distance.Get();
+        float delta = distance - lastDistance;
+        lastDistance = distance;
+        
+        material.SetFloat(CurvatureId, curvature);
+        material.SetFloat(DistanceId, distance);
 
         var newSection = FindSection();
         if (newSection != section)
         {
             section = newSection;
-            cur.Next(sections[section].y);
+            Curvature.Next(sections[section].y);
         }
 
-        curvature = cur.Get();
+        curvature = Curvature.Update(delta);
     }
 
     int FindSection()
     {
         float s = 0;
-        float d = distance % sum;
+        float d = Distance.Get() % sum;
         for (int i = 0; i < sections.Length; ++i)
         {
             s += sections[i].x;

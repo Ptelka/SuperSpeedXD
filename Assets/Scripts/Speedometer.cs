@@ -1,18 +1,51 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
 
 public class Speedometer : MonoBehaviour {
-    private Text text;
+    [SerializeField] private GameObject warning;
+    [SerializeField] private GameObject indicator;
+    public float rotationOffset;
+    public float maxSpeed;
+    float startRotation;
 
-    void Start()
+    private AudioSource audio;
+    
+    
+    float Map(float val, float inMin, float inMax, float outMin, float outMax)
     {
-        text = GetComponent<Text>();
+        return (val - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
     }
 
-    public void SetSpeed(float speed)
+    public void Start()
     {
-        text.text = "Speed: " + (int)speed;
+        startRotation = indicator.transform.rotation.eulerAngles.z;
+        audio = GetComponent<AudioSource>();
+    }
+    
+    public void Update()
+    {
+        if (Velocity.Get() > maxSpeed)
+        {
+            PlayAudio();
+        } else
+        {
+            warning.SetActive(false);
+            UpdateIndicatorsPosition(Velocity.Get());
+        }
+    }
+
+    void PlayAudio()
+    {
+        if (warning.activeSelf == false && !audio.isPlaying)
+        {
+            audio.Play();
+            warning.SetActive(true);
+        }
+    }
+
+    void UpdateIndicatorsPosition(float speed)
+    {
+        var rotation = indicator.transform.rotation.eulerAngles;
+        rotation.z = startRotation - Map(speed, 0, maxSpeed, 0, rotationOffset);
+        indicator.transform.rotation = Quaternion.Euler(rotation);
     }
 }

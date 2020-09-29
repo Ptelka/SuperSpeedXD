@@ -15,8 +15,6 @@ public class Car : MonoBehaviour {
     public float minVelocity = 40f;
     public float acceleration = 10f;
     
-    public float curvature = 0f;
-    
     public float roadWidth = 1.025f;
     public float max = 1.32f;
 
@@ -26,16 +24,6 @@ public class Car : MonoBehaviour {
     private float velocity = 0f;
     public float distance = 0f;
 
-    public float GetDistance()
-    {
-        return distance;
-    }
-
-    public float GetVelocity()
-    {
-        return velocity;
-    }
-    
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -43,7 +31,6 @@ public class Car : MonoBehaviour {
         velocity = minVelocity;
     }
 
-    // Update is called once per frame
     void Update()
     {
         CheckInput();
@@ -52,7 +39,7 @@ public class Car : MonoBehaviour {
 
         var pos = transform.position;
         
-        float curveOffset = curvature * Time.deltaTime * velocity * adhesion;
+        float curveOffset = Curvature.Get() * Time.deltaTime * velocity * adhesion;
         
         pos.x -= curveOffset;
 
@@ -77,6 +64,9 @@ public class Car : MonoBehaviour {
         pos.x = Mathf.Min(pos.x, max);
         
         transform.position = pos;
+        
+        Distance.Set(distance);
+        Velocity.Set(velocity);
     }
 
     void UpdateAnim()

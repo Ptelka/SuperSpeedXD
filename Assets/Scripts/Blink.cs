@@ -7,10 +7,12 @@ public class Blink : MonoBehaviour{
     private bool visible = true;
 
     private Text text;
+    private new Renderer renderer;
 
     void Start()
     {
         text = GetComponent<Text>();
+        renderer = GetComponent<Renderer>();
     }
 
     void Update()
@@ -20,8 +22,17 @@ public class Blink : MonoBehaviour{
         if (timer > blinkTime)
         {
             visible = !visible;
-            text.enabled = visible;
             timer = 0;
+            
+            UpdateVisibility();
         }
+    }
+
+    void UpdateVisibility()
+    {
+        if (text)
+            text.enabled = visible;
+        else if (renderer)
+            renderer.enabled = visible;
     }
 }

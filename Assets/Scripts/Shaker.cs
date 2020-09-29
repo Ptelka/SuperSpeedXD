@@ -10,7 +10,7 @@ public class Shaker : MonoBehaviour {
 
     void Update (){
         if (temp_shake_intensity > 0){
-            transform.position = originPosition + Random.insideUnitSphere * temp_shake_intensity * .2f;
+            transform.position = originPosition + Random.insideUnitSphere * (temp_shake_intensity * .2f);
             transform.rotation = new Quaternion(
                 originRotation.x + Random.Range (-temp_shake_intensity,temp_shake_intensity) * .2f,
                 originRotation.y + Random.Range (-temp_shake_intensity,temp_shake_intensity) * .2f,
