@@ -1,10 +1,11 @@
 using System;
 using UnityEngine;
 
-public class RoadSideFactory : MonoBehaviour, Factory, RoadObjectListener {
+public class RoadSideFactory : MonoBehaviour {
     public GameObject[] prefabs;
     public float offset;
     public int count;
+    [SerializeField] private int logBase = 16; 
     private Vector2 start;
 
     private GameObject last;
@@ -12,7 +13,7 @@ public class RoadSideFactory : MonoBehaviour, Factory, RoadObjectListener {
     private void Start()
     {
         start = transform.position;
-        for (int i = 0; i < count; ++i)
+        for (int i = count; i >= 0; --i)
         {
             InstantiateNewObject(i);
         }
@@ -20,29 +21,18 @@ public class RoadSideFactory : MonoBehaviour, Factory, RoadObjectListener {
 
     private void Update()
     {
-        if (last == null || transform.position.y - last.transform.position.y >= offset / Mathf.Pow(Velocity.Get(), 1f / 3f))
+        if (last == null || transform.position.y - last.transform.position.y >= offset / Mathf.Log(Velocity.Get(), logBase))
         {
-            Instantiate();
+            InstantiateNewObject(0);
         }
     }
 
-    RoadObject InstantiateNewObject(int i)
+    void InstantiateNewObject(int i)
     {
         var pos = new Vector2(start.x, start.y - i * offset);
+        var order = last == null ? i : last.GetComponent<SpriteRenderer>().sortingOrder - 1;
+        
         last = Instantiate(prefabs[i % prefabs.Length], pos, transform.rotation, transform);
-        var obj = last.GetComponent<RoadObject>();
-        obj.AddListener(this);
-        obj.SetSortingLayer(i + 100);
-        return obj;
-    }
-
-    public RoadObject Instantiate()
-    {
-        return InstantiateNewObject(0);
-    }
-
-    public void OnObjectDestroy(RoadObject obj)
-    {
-
+        last.GetComponent<SpriteRenderer>().sortingOrder = order;
     }
 }

@@ -33,7 +33,7 @@ public class ObstacleFactory : MonoBehaviour
     {
         var pos = UnitConversion.PointToScreenRatio(transform.position);
         var perspective = RoadCommon.PERSPECTIVE(pos.y, RoadSize.Get().y);
-        var max = RoadSize.Get().x * perspective / 2f;
+        var max = RoadSize.Get().x * perspective;
 
         var offset= Random.Range(-max, max);
         return new Vector2(transform.position.x + offset, transform.position.y);

@@ -38,9 +38,21 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: background
-    uniqueID: 75358047
-    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 75358047
+    locked: 0
+  - name: Road Side
+    uniqueID: 518003447
+    locked: 0
+  - name: Obstacles
+    uniqueID: 506997401
+    locked: 0
+  - name: Player
+    uniqueID: 1806130733
+    locked: 0
+  - name: UI
+    uniqueID: 526215301
     locked: 0

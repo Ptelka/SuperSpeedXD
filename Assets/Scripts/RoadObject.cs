@@ -10,47 +10,26 @@ public class RoadObject: MonoBehaviour {
     private float offset;
     private float perspective;
     
-    private List<RoadObjectListener> listeners = new List<RoadObjectListener>();
-
-    private void Awake()
+    private void Start()
     {
         startScale = transform.localScale;
         startPosition = UnitConversion.PointToScreenRatio(transform.position);
+        Update();
     }
 
     public void Update()
     {
-        if (IsOnScreen())
+        if (!IsOnScreen())
         {
+            Destroy(gameObject);
+        } else {
             offset += CalculateOffset();
             currentPosition = new Vector2(startPosition.x, startPosition.y + offset);
             perspective = RoadCommon.PERSPECTIVE(currentPosition.y, RoadSize.Get().y);
             float distanceFromCenter = 0.5f - startPosition.x;
             currentPosition.x += RoadCommon.CURVE(Curvature.Get(), perspective) + distanceFromCenter * perspective;
             ApplyPosition(currentPosition);
-        } else
-        {
-            WarnListeners();
-            Destroy(gameObject);
         }
-    }
-
-    void WarnListeners()
-    {
-        foreach (var listener in listeners)
-        {
-            listener.OnObjectDestroy(this);
-        }
-    }
-
-    public void AddListener(RoadObjectListener listener)
-    {
-        listeners.Add(listener);
-    }
-
-    public void SetSortingLayer(int layer)
-    {
-        GetComponent<SpriteRenderer>().sortingOrder = layer;
     }
 
     public bool IsOnScreen() {
