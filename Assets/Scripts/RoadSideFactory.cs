@@ -31,7 +31,6 @@ public class RoadSideFactory : MonoBehaviour, Factory, RoadObjectListener {
         var pos = new Vector2(start.x, start.y - i * offset);
         last = Instantiate(prefabs[i % prefabs.Length], pos, transform.rotation, transform);
         var obj = last.GetComponent<RoadObject>();
-        obj.SetRoadHeight(0.6f);
         obj.AddListener(this);
         obj.SetSortingLayer(i + 100);
         return obj;

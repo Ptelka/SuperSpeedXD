@@ -7,7 +7,6 @@ public class RoadObject: MonoBehaviour {
     private Vector2 startPosition;
     private Vector2 currentPosition;
     
-    private float roadHeight;
     private float offset;
     private float perspective;
     
@@ -19,18 +18,13 @@ public class RoadObject: MonoBehaviour {
         startPosition = UnitConversion.PointToScreenRatio(transform.position);
     }
 
-    public void SetRoadHeight(float height)
-    {
-        roadHeight = height;
-    }
-    
     public void Update()
     {
         if (IsOnScreen())
         {
             offset += CalculateOffset();
             currentPosition = new Vector2(startPosition.x, startPosition.y + offset);
-            perspective = RoadCommon.PERSPECTIVE(currentPosition.y, roadHeight);
+            perspective = RoadCommon.PERSPECTIVE(currentPosition.y, RoadSize.Get().y);
             float distanceFromCenter = 0.5f - startPosition.x;
             currentPosition.x += RoadCommon.CURVE(Curvature.Get(), perspective) + distanceFromCenter * perspective;
             ApplyPosition(currentPosition);

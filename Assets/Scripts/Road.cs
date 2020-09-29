@@ -1,8 +1,9 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class Road : MonoBehaviour {
     public float curvature = 0f;
-    public Vector2 size = new Vector2(0.6f, 0.6f);
+    public Vector2 size = new Vector2(0.8f, 0.6f);
     
     private float lastDistance;
 
@@ -15,14 +16,19 @@ public class Road : MonoBehaviour {
 
     private int section = 0;
     private float sum = 0;
-    
+
+    private void Awake()
+    {
+        RoadSize.Set(size);
+    }
+
     private void Start()
     {
         material = GetComponent<SpriteRenderer>().material;
         material.SetVector("road_size", new Vector4(size.x, size.y));
         material.SetColorArray("layers", new []{Color.gray, Color.black, Color.red});
         material.SetColorArray("background", new []{Color.white, Color.yellow});
-        material.SetFloatArray("layers_sizes", new []{0.4f, 0.05f, 0.05f});
+        material.SetFloatArray("layers_sizes", new []{size.x/2f, 0.05f, 0.05f});
         material.SetInt("layers_count", 3);
         material.SetFloat("markings_size", 0.01f);
 
