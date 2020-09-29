@@ -1,4 +1,5 @@
 ﻿
+using System;
 using UnityEngine;
 
 public class Car : MonoBehaviour {
@@ -15,7 +16,6 @@ public class Car : MonoBehaviour {
     public float minVelocity = 40f;
     public float acceleration = 10f;
     
-    public float roadWidth = 1.025f;
     public float max = 1.32f;
 
     public float adhesion = 0.3f;
@@ -53,13 +53,6 @@ public class Car : MonoBehaviour {
             pos.x = pos.x + (cornerSpeed * Time.deltaTime + Mathf.Abs(curveOffset * 0.4f));
         }
 
-
-        if (pos.x < -roadWidth || pos.x > roadWidth)
-        {
-            velocity = Mathf.Max(minVelocity, velocity * .8f);
-            shaker.Shake();
-        }
-        
         pos.x = Mathf.Max(pos.x, -max);
         pos.x = Mathf.Min(pos.x, max);
         
@@ -73,6 +66,12 @@ public class Car : MonoBehaviour {
     {
         animator.SetBool(Right, right);
         animator.SetBool(Left, left); 
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        velocity = Mathf.Max(minVelocity, velocity * .8f);
+        shaker.Shake();
     }
 
     void CheckInput()
@@ -102,6 +101,4 @@ public class Car : MonoBehaviour {
             velocity = Mathf.Max(velocity - acceleration * Time.deltaTime, minVelocity);
         }
     }
-    
-    
 }
