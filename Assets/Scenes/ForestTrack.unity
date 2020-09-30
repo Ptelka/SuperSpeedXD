@@ -870,7 +870,7 @@ GameObject:
   - component: {fileID: 1174322198}
   - component: {fileID: 1174322199}
   m_Layer: 0
-  m_Name: backgrounds
+  m_Name: Backgrounds
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1498,7 +1498,7 @@ PrefabInstance:
     - target: {fileID: 1265965584844682733, guid: 67893beb304cc4b4e8d3a31d06f42918,
         type: 3}
       propertyPath: m_Name
-      value: controller
+      value: Game Controller
       objectReference: {fileID: 0}
     - target: {fileID: 1265965584844682733, guid: 67893beb304cc4b4e8d3a31d06f42918,
         type: 3}
@@ -1577,7 +1577,7 @@ PrefabInstance:
     - target: {fileID: 3178859025563792684, guid: d686e6c52fc91c94ba0c628156caea69,
         type: 3}
       propertyPath: m_Name
-      value: road
+      value: Road
       objectReference: {fileID: 0}
     - target: {fileID: 3178859025563792685, guid: d686e6c52fc91c94ba0c628156caea69,
         type: 3}
@@ -1686,7 +1686,7 @@ PrefabInstance:
     - target: {fileID: 4734807567639029796, guid: 124e3095804a0f34b949215f97bb1e10,
         type: 3}
       propertyPath: m_Name
-      value: car
+      value: Car
       objectReference: {fileID: 0}
     - target: {fileID: 4734807567639029798, guid: 124e3095804a0f34b949215f97bb1e10,
         type: 3}
