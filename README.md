@@ -1,5 +1,5 @@
 # SuperSpeedXD
-Unity pseudo 2D game
+Unity pseudo 3D game
 
 ![Screenshot](seed.png)
 
